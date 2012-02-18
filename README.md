@@ -24,8 +24,9 @@ in the default repository ('bcs'), you'll need to pass that using
 'install_options'.
     
     package { "orbmotd":
-        ensure => installed,
-        install_options => {
+        provider         => hcmbcs,
+        ensure           => installed,
+        install_options  => {
             "repository" => "composition",
         },
     }
@@ -34,7 +35,8 @@ An ensure of 'installed' will not update the package if it is installed
 already. If you wish always to get the latest version, use 'latest':
 
     package { "perl":
-        ensure => latest,
+        provider => hcmbcs,
+        ensure   => latest,
     }
 
 If you want to lock to a partcular build and/or release, pass that
@@ -44,12 +46,14 @@ a space.
 
     ## get the latest release for build 5.8.7
     package { "perl":
-        ensure => "5.8.7",
+        provider => hcmbcs,
+        ensure   => "5.8.7",
     }
 
     ## get precise release 5.8.7.6
     package { "perl":
-        ensure => "5.8.7 6",
+        provider => hcmbcs,
+        ensure   => "5.8.7 6",
     }
 
 It would probably be a really bad idea to try and lock a version in
@@ -61,7 +65,8 @@ the work.
 To ensure a package is *not* installed, use ensure of 'absent':
 
     package { "perl":
-        ensure => absent,
+        provider => hcmbcs,
+        ensure   => absent,
     }
     
 Again, if this package is in your materialized profile, sit back and
