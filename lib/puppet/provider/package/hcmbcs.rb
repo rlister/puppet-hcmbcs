@@ -9,8 +9,6 @@ Puppet::Type.type(:package).provide :hcmbcs, :parent => :rpm, :source => :rpm do
   has_feature :versionable, :upgradeable, :install_options
   commands :hcmbcs => "/opt/bcs/bin/hcmbcs", :rpm => "/opt/bcs/bin/rpm"
 
-  attr_accessor :latest_info
-
   ## check executables are working
   [ 'hcmbcs', 'rpm' ].each do |cmd|
     if command(cmd)
@@ -55,7 +53,6 @@ Puppet::Type.type(:package).provide :hcmbcs, :parent => :rpm, :source => :rpm do
     ## run hcmbcs with options
     begin
       output = hcmbcs "--install", argstr.join(' ')
-      self.debug "hcmbcs output: #{output}"
     rescue Puppet::ExecutionFailure
       raise Puppet::Error, "failed hcmbcs --install"
     end
